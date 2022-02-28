@@ -1,0 +1,15 @@
+Package: popPoweR
+Title: Power analysis for replication GWAS in other ancestries.
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: A common goal of genetic studies in populations of non-European ancestry is to determine whether the effects discovered in European populations replicate. Allele frequencies of SNPs differ between populations, and allele frequencies is a crucial determinant of power. This package takes European GWAS summary statistics and calculates the power to replicate the observed effects in populations with different ancestral backgrounds given 1,000 genomes allele frequencies.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
