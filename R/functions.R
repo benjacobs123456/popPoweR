@@ -80,8 +80,6 @@ format_gwas = function(gwas,
     stop("GWAS must be a data frame")
   }
 
-  gwas = ms_gwas
-
   output_gwas = data.frame(
     CHR = gwas[[chr]],
     SNP = gwas[[snp]],

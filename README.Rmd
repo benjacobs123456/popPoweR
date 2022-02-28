@@ -30,23 +30,30 @@ devtools::install_github("benjacobs123456/popPoweR")
 ```
 ## Workflow
 
-Here's the basic workflow:
+Here's the basic workflow.
 
 ```{r example, eval=FALSE}
 library(popPoweR)
 
-## read in the European-ancestry GWAS
-gwas = read_tsv("gwas_sumstats.tsv")
+## 1 - read in the European-ancestry GWAS
+gwas = readr::read_tsv("../gwas_sumstats.tsv")
 
-## get gwas into the required format
-df = format_gwas(gwas = gwas,chr = "CHR",effect_allele = "A1",other_allele = "A2",snp = "SNP",eaf = "eaf",beta = "beta",n_case = "n_case",n_control = "n_control")
+## 2 - format the sumstats (rename columns)
+df = format_gwas(gwas = gwas,
+                 chr = "chr",
+                 effect_allele = "A1",
+                 other_allele = "A2",
+                 snp = "rsid",
+                 eaf = "A1freq",
+                 beta = "BETA",
+                 n_case = "cases",
+                 n_control = "controls")
 
-## combine gwas with 1kg frequencies
+## 3 - combine gwas with 1kg frequencies
 kg_combo = combine_gwas_with_1kg_freqs(df)
 
-## and work out power across every SNP
+## 4 - and work out power across every SNP
 outputdf = power_calc_per_pop(kg_combo,n_perm = 1000,alpha=0.05,pop="AFR")
-
 ```
 
 
