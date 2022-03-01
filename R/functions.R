@@ -23,8 +23,7 @@ gwas_power = function(eaf = 0.5,
 
   # make model
   model = glm(test_phenos ~ test_genos,family=binomial(link="logit"))
-  se = summary(model)$coefficients[2,2]
-
+  se =summary(model)$coefficients[2,2]
   # simulate SNP effects from a normal using this SE
   betas = rnorm(n = n_perm, mean = beta_alt, sd = se)
   z_scores = betas/se
@@ -165,7 +164,7 @@ combine_gwas_with_1kg_freqs = function(gwas){
 #' power_stats = power_calc_per_pop(kg_combo,n_perm = 1000,alpha=0.05,pop="AFR") # for AFR
 #' power_stats = power_calc_per_pop(kg_combo,n_perm = 1000,alpha=0.05,pop="SAS") # for SAS
 
-power_calc_per_pop = function(gwas,n_perm,alpha,pop){
+power_calc_per_pop = function(gwas,n_perm,alpha,pop,beta="beta",n_case="n_case",n_control="n_control"){
   if(!is.data.frame(gwas)){
     stop("GWAS input must be a data frame with 1kg allele frequencies (i.e. output of combine_gwas_with_1kg_freqs)")
   }
@@ -192,9 +191,9 @@ power_calc_per_pop = function(gwas,n_perm,alpha,pop){
     message("Estimating power at SNP ",i," of ",nrow(gwas))
     power = gwas_power(
       eaf = gwas[[pop]][i],
-      beta_alt = gwas$beta[i],
-      n_case = gwas$n_case[i],
-      n_control = gwas$n_control[i],
+      beta_alt = gwas[[beta]][i],
+      n_case = gwas[[n_case]][i],
+      n_control = gwas[[n_control]][i],
       alpha = alpha,
       n_perm = n_perm
     )
